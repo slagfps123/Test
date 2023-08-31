@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+    <script src="index.js"></script>
+   <!--<script>
+        window.onload = function() {
+            AFRAME.registerComponent('videohandler', {
+                init: function () {
+                    var marker = this.el;
+    
+                    this.vid = document.querySelector("#goku");
+    
+                    marker.addEventListener('markerFound', function () {
+                        this.vid.play();
+                    }.bind(this));
+    
+            marker.addEventListener('markerLost', function() {
+                this.vid.pause();
+                this.vid.currentTime = 0;
+
+            }.bind(this));
+                }
+            });
+        };
+    </script> -->
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+   
+    <a-scene embedded arjs='sourceType: webcam;'>
+
+        <a-marker id="marker-a" preset='custom' type='pattern' url='assets/pattern-g-angle-box.patt' marker-a>
+            <a-entity cloak></a-entity>
+            <a-entity object-a id="object-a" position="0 0 0" animation-mixer></a-entity>
+        </a-marker>
+        <a-marker id="marker-b" preset='custom' type='pattern' url='assets/pattern-g-angle-sphere.patt' marker-b>
+            <a-entity cloak></a-entity>
+            <a-entity id="object-b" gltf-model="/assets/stuff_octopus_v2.glb" scale="0.3 0.3 0.3" position="0 0 0"
+                object-b>
+            </a-entity>
+        </a-marker>
+    <!--
+        <a-assets>
+            <video src='assets/goku.mp4'
+                preload="auto" id="vid" response-type="arraybuffer" loop
+                crossorigin webkit-playsinline autoplay muted playsinline>
+            </video>
+        </a-assets>
+
+        <a-nft
+        videohandler
+        type="nft" url='assets/goku2'
+        smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5"
+    >
+            <a-video
+                src="#vid"
+                position='50 150 -100'
+                rotation='90 0 180'
+                width='300'
+                height='175'
+                >
+            </a-video>
+        </a-marker> -->
+
+<!--        <a-assets timeout=""10000>
+            <video id="object-c" loop="true" src="assets/goku.mp4" response-type="arraybuffer" object-c></video>
+        </a-assets>
+            <a-video width="1" height="1" rotation="-90 0 0" src="#object-c" position="0.2 0 0"></a-video>
+        <a-marker-camera preset='custom' type='pattern' url='assets/goku.patt' id="marker-c" marker-c></a-marker-camera>
+    -->
+
+    <a-assets>
+        <video
+            id="vid"
+            src="assets/goku.mp4"
+            preload="auto"
+            response-type="arraybuffer"
+            loop
+            crossorigin
+            webkit-playsinline
+            autoplay
+            playsinline
+        ></video>
+    </a-assets>
+
+    <a-marker
+        type="pattern"
+        preset="custom"
+        url="assets/goku.patt"
+        videohandler
+        smooth="true"
+        smoothCount="10"
+        smoothTolerance="0.01"
+        smoothThreshold="5"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse;"
+        id="markerA"
+    >
+        <a-video
+            src="#vid"
+            scale="1 1 1"
+            position="0 0.1 0"
+            rotation="-90 0 0"
+            class="clickable"
+            gesture-handler
+        ></a-video>
+    </a-marker>
+       
+        <a-entity camera></a-entity>
+        
+
+
+
+
+
+
+
+    </a-scene>
+</body>
+
+</html>
